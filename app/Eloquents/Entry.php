@@ -40,15 +40,6 @@ class Entry extends Model
         return $this->hasMany('App\Eloquents\EntryDetail');
     }
 
-
-    public function getChildrenKindsAttribute()
-    {
-        $res = [];
-        foreach ($this->entryDetail as $detail) {
-            $res[] = $detail->kind_of_info;
-        }
-        return collect($res);
-    }
     public function getParsedHeadlineAttribute()
     {
         preg_match('/【(.*)】(.*)/', $this->headline, $headline);
@@ -57,5 +48,14 @@ class Entry extends Model
             'title' => $headline[1],
             'headline' => $headline[2],
         ]);
+    }
+
+    public function getChildrenKindsAttribute()
+    {
+        $res = [];
+        foreach ($this->entryDetail as $detail) {
+            $res[] = $detail->kind_of_info;
+        }
+        return collect($res);
     }
 }
