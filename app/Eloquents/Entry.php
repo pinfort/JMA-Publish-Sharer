@@ -46,12 +46,4 @@ class Entry extends Model
         }
         return collect($res);
     }
-
-    public function getParsedHeadlineAttribute() {
-        preg_match('/【(.*)】(.*)/', $this->headline, $headline);
-        return collect([
-            'title' => $headline[1],
-            'headline' => $headline[2],
-        ]);
-    }
 }
